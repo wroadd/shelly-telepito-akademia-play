@@ -82,14 +82,3 @@ https://github.com/wroadd/shelly-telepito-akademia-play
 ## Fontos megjegyzés
 
 Ez oktatási célú, egyszerűsített szimulátor. Valós telepítésnél mindig a hivatalos Shelly dokumentáció, a helyi szabványok és szakképzett villanyszerelői ellenőrzés az irányadó.
-
-## Fájlok ebben a repóban
-
-Ez a public repo csak a játék futtatásához szükséges statikus fájlokat tartalmazza:
-
-- `index.html`
-- `style.css`
-- `app.js`
-- `alaprajz.png`
-
-A teljes fejlesztői és oktatói anyag a privát forrásrepóban marad.
