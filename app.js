@@ -6,7 +6,7 @@ const productImages = {
   pro4pm: "https://cdn.shopify.com/s/files/1/0887/9941/2565/files/Shelly-Pro-4PM-main-image_85d24dce-f850-4131-b54e-ab92e9a84e8f.png?v=1762463578"
 };
 
-const floorplanImage = "./alaprajz.png?v=20260613-24vdc";
+const floorplanImage = "./alaprajz.png?v=20260613-24vdc2";
 
 const devices = [
   {
