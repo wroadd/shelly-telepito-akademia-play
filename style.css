@@ -382,13 +382,13 @@ textarea {
   transform: translate(-50%, -50%) translateY(-1px);
 }
 
-.point-g { left: 6.3%; top: 8.5%; }
+.point-g { left: 85%; top: 86%; }
 .point-a { left: 55%; top: 47%; }
 .point-b { left: 84%; top: 26%; }
 .point-c { left: 36%; top: 55%; }
 .point-d { left: 76%; top: 51%; }
 .point-e { left: 27%; top: 86%; }
-.point-f { left: 85%; top: 86%; }
+.point-f { left: 22%; top: 56%; }
 
 .point-legend {
   display: grid;

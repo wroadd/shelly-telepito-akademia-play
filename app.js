@@ -557,13 +557,6 @@ function boot() {
             <h2>Helyszínrajz és eszközelhelyezés</h2>
             <div class="map" role="img" aria-label="Lakás alaprajz helyiségekkel és kötési pontokkal">
               <img class="floorplan-image" src="${floorplanImage}" alt="Lakás alaprajz: műhely, WC, előtér, nappali, konyha és hálószoba">
-              <div class="room label-storage">${roomLabels.storage}</div>
-              <div class="room label-wc">${roomLabels.wc}</div>
-              <div class="room label-hall">${roomLabels.hall}</div>
-              <div class="room label-living">${roomLabels.living}</div>
-              <div class="room label-kitchen">${roomLabels.kitchen}</div>
-              <div class="room label-bedroom">${roomLabels.bedroom}</div>
-              <div class="room label-gate">${roomLabels.gate}</div>
               ${installPoints.map((point) => `
                 <button class="install-point ${point.className} ${state.placedPoint === point.id ? "occupied" : ""}" data-point="${point.id}" aria-label="${escapeHtml(point.name)}">
                   <span class="point-letter">${point.label}</span>
