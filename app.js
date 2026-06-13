@@ -6,6 +6,8 @@ const productImages = {
   pro4pm: "https://cdn.shopify.com/s/files/1/0887/9941/2565/files/Shelly-Pro-4PM-main-image_85d24dce-f850-4131-b54e-ab92e9a84e8f.png?v=1762463578"
 };
 
+const floorplanImage = "./alaprajz.png?v=20260613-24vdc";
+
 const devices = [
   {
     id: "shelly1",
@@ -521,7 +523,7 @@ function boot() {
           <section class="floorplan">
             <h2>Helyszínrajz és eszközelhelyezés</h2>
             <div class="map" role="img" aria-label="Lakás alaprajz helyiségekkel és kötési pontokkal">
-              <img class="floorplan-image" src="./alaprajz.png" alt="Lakás alaprajz: tároló, WC, előtér, nappali, konyha és hálószoba">
+              <img class="floorplan-image" src="${floorplanImage}" alt="Lakás alaprajz: tároló, WC, előtér, nappali, konyha és hálószoba">
               <div class="room label-storage">Tároló</div>
               <div class="room label-wc">WC</div>
               <div class="room label-hall">Előtér</div>
