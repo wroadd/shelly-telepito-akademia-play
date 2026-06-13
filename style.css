@@ -125,6 +125,7 @@ textarea {
 .panel,
 .floorplan,
 .wiring {
+  min-width: 0;
   background: rgba(255, 255, 255, 0.9);
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -224,42 +225,54 @@ textarea {
   position: relative;
   min-height: 430px;
   padding: 16px;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .map {
   position: relative;
-  height: calc(100% - 34px);
-  min-height: 350px;
+  width: 100%;
+  aspect-ratio: 4576 / 2642;
   border: 2px solid #b7c6cf;
-  background:
-    linear-gradient(90deg, rgba(98, 114, 125, 0.09) 1px, transparent 1px),
-    linear-gradient(rgba(98, 114, 125, 0.09) 1px, transparent 1px),
-    #f8fafb;
-  background-size: 34px 34px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.floorplan-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
 }
 
 .room {
   position: absolute;
-  border: 2px solid #b7c6cf;
-  background: rgba(255, 255, 255, 0.65);
-  padding: 10px;
-  font-size: 13px;
+  padding: 5px 7px;
+  border: 1px solid rgba(19, 135, 191, 0.28);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.82);
+  color: var(--ink);
+  font-size: 11px;
   font-weight: 800;
+  line-height: 1;
+  box-shadow: 0 6px 14px rgba(21, 35, 45, 0.08);
 }
 
-.living { inset: 5% 42% 45% 4%; }
-.kitchen { inset: 5% 4% 62% 60%; }
-.hall { inset: 44% 58% 19% 4%; }
-.bedroom { inset: 44% 4% 19% 46%; }
-.utility { inset: 84% 52% 4% 4%; }
-.workshop { inset: 84% 4% 4% 52%; }
+.label-storage { left: 16%; top: 31%; }
+.label-wc { left: 35%; top: 22%; }
+.label-hall { left: 34%; top: 55%; }
+.label-living { left: 50%; top: 45%; }
+.label-kitchen { left: 78%; top: 24%; }
+.label-bedroom { left: 75%; top: 51%; }
+.label-gate { left: 1.6%; top: 8%; }
 
 .install-point {
   position: absolute;
-  width: 54px;
-  min-height: 46px;
-  padding: 5px;
+  width: clamp(34px, 5.2vw, 54px);
+  min-height: clamp(32px, 4.4vw, 46px);
+  padding: 4px;
   display: grid;
   place-items: center;
   gap: 1px;
@@ -270,6 +283,7 @@ textarea {
   font-weight: 900;
   box-shadow: 0 10px 24px rgba(21, 35, 45, 0.2);
   cursor: pointer;
+  transform: translate(-50%, -50%);
 }
 
 .install-point span {
@@ -286,15 +300,16 @@ textarea {
 
 .install-point.occupied {
   background: var(--green);
-  transform: translateY(-1px);
+  transform: translate(-50%, -50%) translateY(-1px);
 }
 
-.point-a { left: 23%; top: 27%; }
-.point-b { left: 74%; top: 23%; }
-.point-c { left: 25%; top: 59%; }
-.point-d { left: 70%; top: 57%; }
-.point-e { left: 22%; top: 85%; }
-.point-f { left: 72%; top: 85%; }
+.point-g { left: 6.3%; top: 8.5%; }
+.point-a { left: 55%; top: 47%; }
+.point-b { left: 84%; top: 26%; }
+.point-c { left: 36%; top: 55%; }
+.point-d { left: 76%; top: 51%; }
+.point-e { left: 27%; top: 86%; }
+.point-f { left: 85%; top: 86%; }
 
 .placement-status {
   margin-top: 10px;
@@ -578,7 +593,7 @@ textarea {
 
 @media (max-width: 1120px) {
   .workspace {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .topbar {
@@ -610,10 +625,6 @@ textarea {
   .automation-grid,
   .terminal-grid {
     grid-template-columns: 1fr;
-  }
-
-  .map {
-    min-height: 430px;
   }
 
   .device-card {

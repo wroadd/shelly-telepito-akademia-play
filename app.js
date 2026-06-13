@@ -53,7 +53,7 @@ const builtinLevels = [
     needs: ["potenciálmentes kontaktus", "helyi nyomógomb megtartása", "rövid impulzusos nyitás"],
     correctDevice: "shelly1",
     correctAutomation: "pulse",
-    correctPoint: "A",
+    correctPoint: "G",
     terminals: ["L", "N", "I", "O", "SW"],
     correctWiring: { L: "230 V fázis", N: "nulla", I: "kapumotor COM", O: "kapumotor START", SW: "kaputelefon nyomógomb" },
     safetyChecks: ["potenciálmentes kontaktus ellenőrzése", "kisfeszültség és hálózat szétválasztása"],
@@ -171,10 +171,11 @@ const baseWireOptions = [
 ];
 
 const installPoints = [
-  { id: "A", label: "A", name: "Nappali falidoboz", className: "point-a" },
+  { id: "G", label: "G", name: "Kertkapu kötési hely", className: "point-g" },
+  { id: "A", label: "A", name: "Nappali redőnykapcsoló", className: "point-a" },
   { id: "B", label: "B", name: "Konyhai kapcsoló", className: "point-b" },
-  { id: "C", label: "C", name: "Redőnykapcsoló", className: "point-c" },
-  { id: "D", label: "D", name: "Előszoba szenzor", className: "point-d" },
+  { id: "C", label: "C", name: "Előtér érzékelő", className: "point-c" },
+  { id: "D", label: "D", name: "Hálószoba kötési pont", className: "point-d" },
   { id: "E", label: "E", name: "Elosztószekrény DIN", className: "point-e" },
   { id: "F", label: "F", name: "Műhely elosztás", className: "point-f" }
 ];
@@ -517,13 +518,15 @@ function boot() {
         <div class="main-column">
           <section class="floorplan">
             <h2>Helyszínrajz és eszközelhelyezés</h2>
-            <div class="map" role="img" aria-label="Egyszerűsített lakás és elosztó alaprajz telepítési pontokkal">
-              <div class="room living">Nappali</div>
-              <div class="room kitchen">Konyha</div>
-              <div class="room hall">Előszoba</div>
-              <div class="room bedroom">Háló</div>
-              <div class="room utility">Elosztó</div>
-              <div class="room workshop">Műhely</div>
+            <div class="map" role="img" aria-label="Lakás alaprajz helyiségekkel és kötési pontokkal">
+              <img class="floorplan-image" src="./alaprajz.png" alt="Lakás alaprajz: tároló, WC, előtér, nappali, konyha és hálószoba">
+              <div class="room label-storage">Tároló</div>
+              <div class="room label-wc">WC</div>
+              <div class="room label-hall">Előtér</div>
+              <div class="room label-living">Nappali</div>
+              <div class="room label-kitchen">Konyha</div>
+              <div class="room label-bedroom">Hálószoba</div>
+              <div class="room label-gate">Kertkapu</div>
               ${installPoints.map((point) => `
                 <button class="install-point ${point.className} ${state.placedPoint === point.id ? "occupied" : ""}" data-point="${point.id}" aria-label="${escapeHtml(point.name)}">
                   <span>${point.label}</span>

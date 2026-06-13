@@ -7,6 +7,7 @@ Ez a repo csak a GitHub Pages-en futtatható statikus játékfájlokat tartalmaz
 - `index.html`
 - `style.css`
 - `app.js`
+- `alaprajz.png`
 
 A teljes fejlesztői és oktatói anyag a privát forrásrepóban marad.
 

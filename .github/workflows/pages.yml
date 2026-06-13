@@ -27,6 +27,7 @@ jobs:
           test -f index.html
           test -f style.css
           test -f app.js
+          test -f alaprajz.png
           node --check app.js
 
   deploy:
