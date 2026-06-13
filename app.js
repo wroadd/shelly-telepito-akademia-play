@@ -9,10 +9,10 @@ const productImages = {
 const devices = [
   {
     id: "shelly1",
-    name: "Shelly 1 Mini Gen3",
+    name: "Shelly 1 Gen3",
     img: productImages.shelly1,
-    summary: "1 csatornas, 8 A relé szárazkontaktussal; garázskapuhoz, öntözéshez vagy külön tápú körökhöz.",
-    source: "https://us.shelly.com/products/shelly-1-mini-gen3"
+    summary: "1 csatornas szárazkontaktos relé, 110-240 V AC, 24-48 V DC vagy 12 V DC tápellátással.",
+    source: "https://us.shelly.com/products/shelly-1-gen3"
   },
   {
     id: "shelly1pm",
@@ -54,10 +54,10 @@ const builtinLevels = [
     correctDevice: "shelly1",
     correctAutomation: "pulse",
     correctPoint: "G",
-    terminals: ["L", "N", "I", "O", "SW"],
-    correctWiring: { L: "230 V fázis", N: "nulla", I: "kapumotor COM", O: "kapumotor START", SW: "kaputelefon nyomógomb" },
-    safetyChecks: ["potenciálmentes kontaktus ellenőrzése", "kisfeszültség és hálózat szétválasztása"],
-    hint: "Szárazkontaktus kell, ezért a kapcsolt kimenet nem vihet saját fázist a motorra."
+    terminals: ["+", "GND", "I", "O", "SW"],
+    correctWiring: { "+": "+24 V DC táp", GND: "0 V DC / GND", I: "kapumotor COM", O: "kapumotor START", SW: "kaputelefon 24 V nyomógomb" },
+    safetyChecks: ["24 V DC táp polaritás ellenőrzése", "potenciálmentes kontaktus ellenőrzése", "kaputelefon nyomógomb kompatibilitása a 24 V-os körrel"],
+    hint: "A Shelly 24 V DC-ről kap tápot, a relékimenet továbbra is szárazkontaktusos impulzust ad a kapumotor START bemenetére."
   },
   {
     id: "kitchen",
@@ -144,9 +144,11 @@ const automations = [
 const baseWireOptions = [
   "230 V fázis",
   "nulla",
+  "+24 V DC táp",
+  "0 V DC / GND",
   "kapumotor COM",
   "kapumotor START",
-  "kaputelefon nyomógomb",
+  "kaputelefon 24 V nyomógomb",
   "lámpaterhelés",
   "fali kapcsoló",
   "motor fel",
