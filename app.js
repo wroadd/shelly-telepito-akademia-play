@@ -221,13 +221,13 @@ const baseWireOptions = [
 ];
 
 const installPoints = [
-  { id: "G", label: "G", name: "Kertkapu kötési hely", className: "point-g" },
-  { id: "A", label: "A", name: "Nappali redőnykapcsoló", className: "point-a" },
-  { id: "B", label: "B", name: "Konyhai kapcsoló", className: "point-b" },
-  { id: "C", label: "C", name: "Előtér érzékelő", className: "point-c" },
-  { id: "D", label: "D", name: "Hálószoba kötési pont", className: "point-d" },
-  { id: "E", label: "E", name: "Elosztószekrény DIN", className: "point-e" },
-  { id: "F", label: "F", name: "Műhely elosztás", className: "point-f" }
+  { id: "G", label: "G", caption: "Kertkapu", name: "Kertkapu kötési hely", className: "point-g" },
+  { id: "A", label: "A", caption: "Nappali", name: "Nappali redőnykapcsoló", className: "point-a" },
+  { id: "B", label: "B", caption: "Konyha", name: "Konyhai kapcsoló", className: "point-b" },
+  { id: "C", label: "C", caption: "Előtér", name: "Előtér érzékelő", className: "point-c" },
+  { id: "D", label: "D", caption: "Háló", name: "Hálószoba kötési pont", className: "point-d" },
+  { id: "E", label: "E", caption: "DIN elosztó", name: "Elosztószekrény DIN", className: "point-e" },
+  { id: "F", label: "F", caption: "Műhely elosztó", name: "Műhely elosztás", className: "point-f" }
 ];
 
 const storageKey = "shellyAcademyProfile.v2";
@@ -566,9 +566,17 @@ function boot() {
               <div class="room label-gate">${roomLabels.gate}</div>
               ${installPoints.map((point) => `
                 <button class="install-point ${point.className} ${state.placedPoint === point.id ? "occupied" : ""}" data-point="${point.id}" aria-label="${escapeHtml(point.name)}">
-                  <span>${point.label}</span>
+                  <span class="point-letter">${point.label}</span>
                   ${state.placedPoint === point.id && placedDevice ? `<small>${escapeHtml(placedDevice.name.replace("Shelly ", ""))}</small>` : ""}
                 </button>
+              `).join("")}
+            </div>
+            <div class="point-legend" aria-label="Kötési pontok jelmagyarázata">
+              ${installPoints.map((point) => `
+                <div class="point-legend-item">
+                  <strong>${point.label}</strong>
+                  <span>${escapeHtml(point.caption)}</span>
+                </div>
               `).join("")}
             </div>
             <div class="placement-status">
