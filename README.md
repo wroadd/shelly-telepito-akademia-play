@@ -1,6 +1,6 @@
-# Shelly Telepítő Akadémia - Play
+# Shelly Telepítő Szimulátor - Play
 
-Publikus futtató repo a Shelly Telepítő Akadémia böngészős játékhoz.
+Publikus futtató repo a Shelly Telepítő Szimulátor böngészős játékhoz.
 
 Ez a repo csak a GitHub Pages-en futtatható statikus játékfájlokat tartalmazza:
 

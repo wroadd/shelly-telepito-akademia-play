@@ -6,7 +6,17 @@ const productImages = {
   pro4pm: "https://cdn.shopify.com/s/files/1/0887/9941/2565/files/Shelly-Pro-4PM-main-image_85d24dce-f850-4131-b54e-ab92e9a84e8f.png?v=1762463578"
 };
 
+const appTitle = "Shelly Telepítő Szimulátor";
 const floorplanImage = "./alaprajz.png?v=20260613-24vdc2";
+const roomLabels = {
+  storage: "Műhely",
+  wc: "WC",
+  hall: "Előtér",
+  living: "Nappali",
+  kitchen: "Konyha",
+  bedroom: "Hálószoba",
+  gate: "Kertkapu"
+};
 
 const devices = [
   {
@@ -51,8 +61,14 @@ const builtinLevels = [
     id: "gate",
     title: "1. Kertkapu és kaputelefon",
     difficulty: "alap",
-    client: "A tulajdonos telefonról és a meglévő kaputelefonról is nyitná a 24 V-os kertkaput. Nem akarja, hogy a Shelly ráadja a hálózati fázist a kapumotor bemenetére.",
+    client: "A tulajdonos telefonról és a meglévő kaputelefonról is nyitná a 24 V-os kertkaput.",
     needs: ["potenciálmentes kontaktus", "helyi nyomógomb megtartása", "rövid impulzusos nyitás"],
+    helpItems: [
+      "Javaslat: használj potenciálmentes kontaktust, hogy a Shelly ne adjon hálózati fázist a kapumotor bemenetére.",
+      "Tartsd meg a helyi/kaputelefonos nyomógombos vezérlést.",
+      "A kapumotor START bemenetére rövid impulzusos nyitás kell.",
+      "A Shelly tápellátása ezen a pályán 24 V DC legyen."
+    ],
     correctDevice: "shelly1",
     correctAutomation: "pulse",
     correctPoint: "G",
@@ -67,6 +83,12 @@ const builtinLevels = [
     difficulty: "alap",
     client: "A konyhai pultvilágítás kapcsolható maradjon a fali kapcsolóról, de az ügyfél fogyasztási adatokat is kér a Shelly appban.",
     needs: ["1 kapcsolt világítási kör", "fogyasztásmérés", "meglévő fali kapcsoló"],
+    helpItems: [
+      "Javaslat: PM-es relét válassz, mert fogyasztásmérés is kell.",
+      "A lámpaterhelés a mért kimenetre kerüljön.",
+      "A meglévő fali kapcsolót az SW bemeneten tartsd meg.",
+      "Ellenőrizd, hogy van-e nulla vezető a szerelési ponton."
+    ],
     correctDevice: "shelly1pm",
     correctAutomation: "schedule",
     correctPoint: "B",
@@ -79,8 +101,14 @@ const builtinLevels = [
     id: "shutter",
     title: "3. Nappali redőny",
     difficulty: "alap",
-    client: "A nappali redőny legyen százalékosan állítható, reggel automatikusan nyisson, naplemente után zárjon. A motor kétirányú AC redőnymotor.",
+    client: "A nappali redőny legyen százalékosan állítható, reggel automatikusan nyisson, naplemente után zárjon.",
     needs: ["fel/le motorirány", "kalibrált pozíció", "időzített automata"],
+    helpItems: [
+      "Javaslat: kétirányú AC redőnymotorhoz két relékimenetes cover mód kell.",
+      "A fel és le motorirányt külön kimenetre kösd.",
+      "A százalékos pozícióhoz kalibrálás szükséges.",
+      "A fel/le kapcsoló bemeneteket is külön kezeld."
+    ],
     correctDevice: "shelly2pm",
     correctAutomation: "cover",
     correctPoint: "C",
@@ -95,6 +123,12 @@ const builtinLevels = [
     difficulty: "alap",
     client: "Éjjel csak akkor kapcsoljon a folyosó fénye, ha mozgás van és alacsony a fényerő. A falban már van egy Shelly 1PM Mini Gen3.",
     needs: ["mozgásérzékelés", "lux feltétel", "gateway kompatibilitás"],
+    helpItems: [
+      "Javaslat: mozgás és lux feltételt együtt használj, ne feltétel nélküli jelenetet.",
+      "A BLU Motion Bluetooth szenzor, ezért kompatibilis Shelly átjáró kell hozzá.",
+      "A meglévő Gen3/1PM eszköz lehet gateway és lámpakapcsoló cél.",
+      "Adj meg lekapcsolási időzítést, például 120 másodpercet."
+    ],
     correctDevice: "bluMotion",
     correctAutomation: "motionLux",
     correctPoint: "D",
@@ -107,8 +141,14 @@ const builtinLevels = [
     id: "pro-office",
     title: "5. Kis iroda DIN-sínes körök",
     difficulty: "haladó",
-    client: "Egy kis iroda négy világítási körét szeretnék központilag mérni és vezérelni az elosztószekrényből. A körök külön kismegszakítókon vannak, de az ügyfél egyetlen DIN-sínes eszközt kér.",
+    client: "Egy kis iroda négy világítási körét szeretnék központilag mérni és vezérelni.",
     needs: ["4 kapcsolt áramkör", "DIN-sínes szerelés", "csatornánkénti fogyasztásmérés"],
+    helpItems: [
+      "Javaslat: négy csatornához DIN-sínes, többkimenetes Pro eszközt válassz.",
+      "Csatornánkénti fogyasztásmérés kell, ezért Pro 4PM illik a feladathoz.",
+      "Az elosztószekrényben ellenőrizd a közös nullát és a védelmi eszközöket.",
+      "A köröket feliratozd és külön kimenetekre oszd."
+    ],
     correctDevice: "pro4pm",
     correctAutomation: "fourCircuit",
     correctPoint: "E",
@@ -121,8 +161,14 @@ const builtinLevels = [
     id: "three-phase",
     title: "6. Műhely háromfázisú elosztás",
     difficulty: "haladó",
-    client: "A műhelyben három fázisról mennek a nagyobb fogyasztók, de az ügyfél csak külön világítási és aljzat csoportok fogyasztását akarja figyelni, nem motorindítást vezérelni. A cél a túlterhelési kockázatok felismerése.",
+    client: "A műhelyben külön világítási és aljzat csoportok fogyasztását szeretnék figyelni, hogy látszódjanak a túlterhelési kockázatok.",
     needs: ["elosztószekrényes monitoring", "fázisonkénti gondolkodás", "túlterhelési kockázat jelzése"],
+    helpItems: [
+      "Javaslat: elosztószekrényes monitoringban fázisonként gondolkodj.",
+      "Ne motorindítást vezérelj, hanem világítási és aljzat csoportokat monitorozz.",
+      "Ellenőrizd a hiányzó nulla kockázatát és a védelmi készülékek méretezését.",
+      "A terhelési audit automatizálás illik ehhez a pályához."
+    ],
     correctDevice: "pro4pm",
     correctAutomation: "safetyAudit",
     correctPoint: "F",
@@ -287,8 +333,10 @@ function parseCourseJson(text) {
 }
 
 const exportedApi = {
+  appTitle,
   productImages,
   devices,
+  roomLabels,
   builtinLevels,
   automations,
   baseWireOptions,
@@ -321,12 +369,11 @@ function boot() {
     placedPoint: null,
     wiring: {},
     selectedWireSource: null,
+    helpOpen: false,
     playerName: savedProfile.playerName,
     score: savedProfile.score,
     solved: savedProfile.solved,
-    feedback: "Válassz szintet, olvasd el az ügyféligényt, majd helyezd el az eszközt és húzd be a vezetékeket.",
-    courseMessage: "A beépített akadémiai pályák aktívak.",
-    courseJson: ""
+    feedback: "Válassz szintet, olvasd el az ügyféligényt, majd helyezd el az eszközt és húzd be a vezetékeket."
   };
 
   function currentLevel() {
@@ -344,6 +391,7 @@ function boot() {
     state.placedPoint = null;
     state.wiring = {};
     state.selectedWireSource = null;
+    state.helpOpen = false;
     state.feedback = message;
   }
 
@@ -430,37 +478,8 @@ function boot() {
     render();
   }
 
-  function importCourse() {
-    const textarea = document.querySelector("#course-json");
-    state.courseJson = textarea.value;
-    const result = parseCourseJson(textarea.value);
-    if (!result.ok) {
-      state.courseMessage = result.errors.join(" ");
-      render("bad");
-      return;
-    }
-    state.levels = result.levels;
-    state.levelIndex = 0;
-    state.solved = new Set();
-    resetAttempt("Egyedi pályacsomag betöltve. A pontozás új pályasorhoz indult.");
-    state.courseMessage = `${result.levels.length} importált pálya aktív.`;
-    saveProfile();
-    render("good");
-  }
-
-  function resetCourse() {
-    state.levels = cloneLevels(builtinLevels);
-    state.levelIndex = 0;
-    resetAttempt("Visszaállítottad a beépített Shelly Akadémia pályákat.");
-    state.courseMessage = "A beépített akadémiai pályák aktívak.";
-    state.courseJson = "";
-    saveProfile();
-    render();
-  }
-
-  function exportCourse() {
-    state.courseJson = JSON.stringify({ levels: state.levels }, null, 2);
-    state.courseMessage = "Az aktuális pályacsomag kimásolható a szerkesztőből.";
+  function toggleHelp() {
+    state.helpOpen = !state.helpOpen;
     render();
   }
 
@@ -484,7 +503,7 @@ function boot() {
     app.innerHTML = `
       <header class="topbar">
         <div class="brand">
-          <h1>Shelly Telepítő Akadémia</h1>
+          <h1>${appTitle}</h1>
           <p>Interaktív okosotthon telepítő szimulátor Shelly termékadatokra építve</p>
         </div>
         <div class="hud" aria-label="Játék állapot">
@@ -497,6 +516,18 @@ function boot() {
           <div class="hud-pill"><span>Átadás</span><strong>${state.solved.size}</strong></div>
         </div>
       </header>
+
+      <section class="plan-strip" aria-label="Munkafolyamat">
+        <h2>Terv</h2>
+        <ol>
+          <li>Értelmezd az ügyféligényt.</li>
+          <li>Válassz Shelly eszközt.</li>
+          <li>Helyezd el az alaprajzon.</li>
+          <li>Válassz automatizálást.</li>
+          <li>Húzd be a vezetékeket.</li>
+          <li>Tesztelj és javíts.</li>
+        </ol>
+      </section>
 
       <section class="workspace">
         <aside class="panel">
@@ -511,11 +542,13 @@ function boot() {
           </div>
           <div class="brief">
             <p>${escapeHtml(current.client)}</p>
-            <ul>${current.needs.map((need) => `<li>${escapeHtml(need)}</li>`).join("")}</ul>
-          </div>
-          <div class="safety-list">
-            <h3>Biztonsági fókusz</h3>
-            <ul>${(current.safetyChecks || []).map((check) => `<li>${escapeHtml(check)}</li>`).join("")}</ul>
+            <button class="secondary help-button" id="help-toggle" aria-expanded="${state.helpOpen ? "true" : "false"}">Segítséget kérek</button>
+            ${state.helpOpen ? `
+              <div class="help-tooltip" role="tooltip">
+                <strong>Javaslat</strong>
+                <ul>${(current.helpItems || []).map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
+              </div>
+            ` : ""}
           </div>
         </aside>
 
@@ -523,14 +556,14 @@ function boot() {
           <section class="floorplan">
             <h2>Helyszínrajz és eszközelhelyezés</h2>
             <div class="map" role="img" aria-label="Lakás alaprajz helyiségekkel és kötési pontokkal">
-              <img class="floorplan-image" src="${floorplanImage}" alt="Lakás alaprajz: tároló, WC, előtér, nappali, konyha és hálószoba">
-              <div class="room label-storage">Tároló</div>
-              <div class="room label-wc">WC</div>
-              <div class="room label-hall">Előtér</div>
-              <div class="room label-living">Nappali</div>
-              <div class="room label-kitchen">Konyha</div>
-              <div class="room label-bedroom">Hálószoba</div>
-              <div class="room label-gate">Kertkapu</div>
+              <img class="floorplan-image" src="${floorplanImage}" alt="Lakás alaprajz: műhely, WC, előtér, nappali, konyha és hálószoba">
+              <div class="room label-storage">${roomLabels.storage}</div>
+              <div class="room label-wc">${roomLabels.wc}</div>
+              <div class="room label-hall">${roomLabels.hall}</div>
+              <div class="room label-living">${roomLabels.living}</div>
+              <div class="room label-kitchen">${roomLabels.kitchen}</div>
+              <div class="room label-bedroom">${roomLabels.bedroom}</div>
+              <div class="room label-gate">${roomLabels.gate}</div>
               ${installPoints.map((point) => `
                 <button class="install-point ${point.className} ${state.placedPoint === point.id ? "occupied" : ""}" data-point="${point.id}" aria-label="${escapeHtml(point.name)}">
                   <span>${point.label}</span>
@@ -576,17 +609,6 @@ function boot() {
       </section>
 
       <section class="workspace lower-workspace">
-        <section class="panel instructor-panel">
-          <h2>Oktatói import</h2>
-          <textarea id="course-json" spellcheck="false" placeholder='{"levels":[...]}'>${escapeHtml(state.courseJson)}</textarea>
-          <div class="actions compact-actions">
-            <button class="secondary" id="export-course">Export</button>
-            <button class="primary" id="import-course">Import</button>
-            <button class="secondary" id="reset-course">Alap pályák</button>
-          </div>
-          <p class="source-list">${escapeHtml(state.courseMessage)}</p>
-        </section>
-
         <section class="wiring">
           <h2>Vezeték-húzás</h2>
           <div class="wire-board">
@@ -614,18 +636,6 @@ function boot() {
           </div>
           <div class="feedback ${status}">${escapeHtml(state.feedback)}</div>
         </section>
-
-        <aside class="panel">
-          <h2>Terv</h2>
-          <p class="source-list">
-            1. Értelmezd az ügyféligényt.<br>
-            2. Válassz Shelly eszközt.<br>
-            3. Helyezd el az alaprajzon.<br>
-            4. Adj meg automatizálási logikát.<br>
-            5. Húzd be a vezetékeket.<br>
-            6. Tesztelj, javíts, ments profilt.
-          </p>
-        </aside>
       </section>
     `;
 
@@ -634,6 +644,7 @@ function boot() {
 
   function bindEvents() {
     document.querySelector("#player-name").addEventListener("change", (event) => setPlayerName(event.target.value));
+    document.querySelector("#help-toggle").addEventListener("click", toggleHelp);
 
     document.querySelectorAll("[data-level]").forEach((button) => {
       button.addEventListener("click", () => setLevel(Number(button.dataset.level)));
@@ -679,9 +690,6 @@ function boot() {
       render();
     });
     document.querySelector("#reset-progress").addEventListener("click", resetProgress);
-    document.querySelector("#import-course").addEventListener("click", importCourse);
-    document.querySelector("#reset-course").addEventListener("click", resetCourse);
-    document.querySelector("#export-course").addEventListener("click", exportCourse);
   }
 
   render();
