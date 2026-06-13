@@ -505,6 +505,10 @@ function boot() {
         <div class="brand">
           <h1>${appTitle}</h1>
           <p>Interaktív okosotthon telepítő szimulátor Shelly termékadatokra építve</p>
+          <nav class="header-links" aria-label="Projekt linkek">
+            <a href="https://github.com/wroadd/shelly-telepito-akademia-play/issues/new" target="_blank" rel="noreferrer">Hibák és ötletek</a>
+            <a href="https://github.com/wroadd/shelly-telepito-akademia-play" target="_blank" rel="noreferrer">GitHub</a>
+          </nav>
         </div>
         <div class="hud" aria-label="Játék állapot">
           <label class="profile-name">

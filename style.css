@@ -63,6 +63,32 @@ textarea {
   font-size: 14px;
 }
 
+.header-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.header-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.82);
+  color: var(--blue-dark);
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 0 8px 22px rgba(21, 35, 45, 0.05);
+}
+
+.header-links a:hover {
+  border-color: rgba(19, 135, 191, 0.55);
+}
+
 .hud {
   display: flex;
   gap: 10px;
